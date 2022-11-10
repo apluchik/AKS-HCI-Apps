@@ -101,8 +101,11 @@ function Get-DashboardSecret
         [Parameter(Mandatory=$true)]
         [String] $kubeconfig
     )
-
-    $secret = (Execute-KubeCtl -kubeconfig $kubeconfig -arguments "get secret") | findstr $global:dashboardSecret
+    try {
+        $secret = (Execute-KubeCtl -kubeconfig $kubeconfig -arguments "get secret") | findstr $global:dashboardSecret
+    } catch {
+        Write-Host $_
+    }
     if ($secret -eq $null)
     {
         return $null
