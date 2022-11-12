@@ -226,7 +226,6 @@ function Execute-KubeCtl
         [switch] $ignoreError,
         [switch] $showOutput
     )
-    Execute-Command -command kubectl.exe -arguments $("version") -showOutput
     return Execute-Command -command kubectl.exe -arguments $("--kubeconfig=$kubeconfig $arguments") -showOutput:$showOutput.IsPresent -ignoreError:$ignoreError.IsPresent
 }
 
